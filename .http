@@ -1,0 +1,5 @@
+### GET Tasks
+GET http://localhost:3000/tasks
+
+### GET one task
+GET http://localhost:3000/tasks/3
