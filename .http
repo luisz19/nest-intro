@@ -1,5 +1,29 @@
+@baseUrl = http://localhost:3000
+
+@contentType = application/json
+
 ### GET Tasks
-GET http://localhost:3000/tasks
+GET {{baseUrl}}/tasks
 
 ### GET one task
-GET http://localhost:3000/tasks/3
+GET {{baseUrl}}/tasks/3
+
+### POST task
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+    "title": "Nest Task",
+    "description": "some description",
+    "status": "OPEN"
+}
+
+### POST task incorrect
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+
+{
+    "title": 2,
+    "description": "some description",
+    "status": "XXX"
+}
