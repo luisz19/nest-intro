@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, NotFoundException, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import type { ITask } from './task.model';
 import { CreateTaskDto } from './create-task.dto';
@@ -42,6 +42,13 @@ export class TasksController {
         task.status = body.status
 
         return task
+    }
+
+    @Delete('/:id')
+    @HttpCode(HttpStatus.NO_CONTENT) //retorna status de NO CONTENT
+    public deleteTask(@Param() params: FindOneParams): void {
+        const task = this.findOneOrFail(params.id)
+        this.tasksService.deleteTask(task.id)
     }
 
     // centralizar lógica para evitar repetição
