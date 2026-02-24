@@ -1,8 +1,9 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseUUIDPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import type { ITask } from './task.model';
 import { CreateTaskDto } from './create-task.dto';
 import { FindOneParams } from './find-one.params';
+import { UpdateTaskStatusDto } from './update-task-status.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -16,13 +17,7 @@ export class TasksController {
 
     @Get('/:id')
     public findOne(@Param() params: FindOneParams): ITask {
-        const task = this.tasksService.findOne(params.id)
-
-        if(task) {
-            return task
-        }
-
-        throw new NotFoundException()
+        return this.findOneOrFail(params.id)
 
         //another way
         // throw new HttpException({
@@ -36,5 +31,27 @@ export class TasksController {
     @Post()
     public create(@Body() createTaskDto: CreateTaskDto) {
         return this.tasksService.create(createTaskDto)
+    }
+
+    @Patch('/:id/status')
+    public updateTaskStatus(
+        @Param() params: FindOneParams,
+        @Body() body: UpdateTaskStatusDto
+    ) {
+        const task = this.findOneOrFail(params.id)
+        task.status = body.status
+
+        return task
+    }
+
+    // centralizar lógica para evitar repetição
+    private findOneOrFail(id: string): ITask {
+        const task = this.tasksService.findOne(id)
+
+        if(!task) {
+            throw new NotFoundException()
+        }
+
+        return task
     }
 }

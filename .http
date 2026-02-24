@@ -6,7 +6,7 @@
 GET {{baseUrl}}/tasks
 
 ### GET one task
-GET {{baseUrl}}/tasks/3
+GET {{baseUrl}}/tasks/e5a0a96e-25f4-433c-ad55-19a6c9534f88
 
 ### POST task
 POST {{baseUrl}}/tasks
@@ -26,4 +26,12 @@ Content-Type: {{contentType}}
     "title": 2,
     "description": "some description",
     "status": "XXX"
+}
+
+### PATCH task status
+PATCH {{baseUrl}}/tasks/e5a0a96e-25f4-433c-ad55-19a6c9534f88/status
+Content-Type: {{contentType}}
+
+{
+    "status": "DONE"
 }
