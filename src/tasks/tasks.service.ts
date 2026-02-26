@@ -2,20 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { ITask } from './task.model';
 import { CreateTaskDto } from './create-task.dto';
 import { randomUUID } from 'node:crypto';
+import { UpdateTaskDto } from './update-task.dto';
 
 @Injectable()
 export class TasksService {
     private tasks: ITask[] = [] //são inseridas aqui
 
-    findAll(): ITask[] {
+    public findAll(): ITask[] {
         return this.tasks
     }
 
-    findOne(id: string): ITask | undefined {
+    public findOne(id: string): ITask | undefined {
         return this.tasks.find((task) => task.id === id)
     }
 
-    create(createTaskDto: CreateTaskDto): ITask {
+    public create(createTaskDto: CreateTaskDto): ITask {
         const task: ITask = {
             id: randomUUID(),
             ...createTaskDto //nesse caso só pega as propriedades e copia aqui
@@ -25,8 +26,16 @@ export class TasksService {
         return task
     }
 
-    deleteTask(id: string) {
-        this.tasks = this.tasks.filter((task) => task.id != id)
+    public updateTask(task: ITask, updateTaskDto: UpdateTaskDto): ITask {
+        Object.assign(task, updateTaskDto) //copia as propriedades do updateTaskDto para task (função simplicada)
+
+        return task
+    }
+
+    public deleteTask(task: ITask): void {
+        this.tasks = this.tasks.filter(
+            (filtredTask) => filtredTask.id !== task.id
+        )
     }
 
 }

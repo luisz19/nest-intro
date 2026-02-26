@@ -4,6 +4,7 @@ import type { ITask } from './task.model';
 import { CreateTaskDto } from './create-task.dto';
 import { FindOneParams } from './find-one.params';
 import { UpdateTaskStatusDto } from './update-task-status.dto';
+import { UpdateTaskDto } from './update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -33,13 +34,24 @@ export class TasksController {
         return this.tasksService.create(createTaskDto)
     }
 
-    @Patch('/:id/status')
-    public updateTaskStatus(
+    // @Patch('/:id/status')
+    // public updateTaskStatus(
+    //     @Param() params: FindOneParams,
+    //     @Body() body: UpdateTaskStatusDto
+    // ) {
+    //     const task = this.findOneOrFail(params.id)
+    //     task.status = body.status
+
+    //     return task
+    // }
+
+    @Patch('/:id')
+    public updateTask(
         @Param() params: FindOneParams,
-        @Body() body: UpdateTaskStatusDto
+        @Body() updateTaskDto: UpdateTaskDto
     ) {
-        const task = this.findOneOrFail(params.id)
-        task.status = body.status
+        const task = this.findOneOrFail(params.id) //valida existência da task antes de passar para o service
+        this.tasksService.updateTask(task, updateTaskDto)
 
         return task
     }
@@ -48,7 +60,7 @@ export class TasksController {
     @HttpCode(HttpStatus.NO_CONTENT) //retorna status de NO CONTENT
     public deleteTask(@Param() params: FindOneParams): void {
         const task = this.findOneOrFail(params.id)
-        this.tasksService.deleteTask(task.id)
+        this.tasksService.deleteTask(task)
     }
 
     // centralizar lógica para evitar repetição
@@ -60,5 +72,5 @@ export class TasksController {
         }
 
         return task
-    }
+    } //recomendável passar para um service, mas nesse caso é mais simples deixar aqui
 }
