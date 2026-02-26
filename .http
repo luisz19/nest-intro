@@ -6,9 +6,10 @@
 GET {{baseUrl}}/tasks
 
 ### GET one task
-GET {{baseUrl}}/tasks/e5a0a96e-25f4-433c-ad55-19a6c9534f88
+GET {{baseUrl}}/tasks/{{taskId}}
 
 ### POST task
+# @name createTask
 POST {{baseUrl}}/tasks
 Content-Type: {{contentType}}
 
@@ -17,6 +18,9 @@ Content-Type: {{contentType}}
     "description": "some description",
     "status": "OPEN"
 }
+
+### Set the task id
+@taskId = {{ createTask.response.body.id }}
 
 ### POST task incorrect
 POST {{baseUrl}}/tasks
@@ -29,12 +33,12 @@ Content-Type: {{contentType}}
 }
 
 ### PATCH task status
-PATCH {{baseUrl}}/tasks/e5a0a96e-25f4-433c-ad55-19a6c9534f88/status
+PATCH {{baseUrl}}/tasks/{{taskId}}
 Content-Type: {{contentType}}
 
 {
-    "status": "DONE"
+    "status": "IN_PROGRESS"
 }
 
 ### DELETE task
-DELETE {{baseUrl}}/tasks/b9d352c2-2fa4-4370-8687-c46fa635dc1b
+DELETE {{baseUrl}}/tasks/{{taskId}}
