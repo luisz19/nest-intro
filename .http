@@ -16,7 +16,7 @@ Content-Type: {{contentType}}
 {
     "title": "Nest Task",
     "description": "some description",
-    "status": "OPEN"
+    "status": "DONE"
 }
 
 ### Set the task id
