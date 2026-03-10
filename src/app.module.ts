@@ -7,11 +7,12 @@ import { TasksModule } from './tasks/tasks.module';
 import { ConfigModule } from '@nestjs/config';
 import { appConfig } from './config/app.config';
 import { appConfigSchema } from './config/config.types';
+import { typeOrmConfig } from './config/database.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [appConfig], //carrega antes
+      load: [appConfig, typeOrmConfig], //carrega antes
       validationSchema: appConfigSchema,
       validationOptions: {
         // allowUnknown: false, só faz sentido se a aplicação estiver usando um container docker muito isolado que execute apenas Node por exemplo.
