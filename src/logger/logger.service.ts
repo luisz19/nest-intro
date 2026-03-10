@@ -3,13 +3,11 @@ import { MessageFormatterService } from 'src/message-formatter/message-formatter
 
 @Injectable()
 export class LoggerService {
-    constructor(private readonly messageFormatter: MessageFormatterService){}
+  constructor(private readonly messageFormatter: MessageFormatterService) {}
 
-    log(message: string): string {
-        
-        let formattedMessage = this.messageFormatter.format(message)
-        console.log(formattedMessage)
-        return formattedMessage
-    }
-
+  log(message: string): string {
+    const formattedMessage = this.messageFormatter.format(message);
+    console.log(formattedMessage);
+    return formattedMessage;
+  }
 }

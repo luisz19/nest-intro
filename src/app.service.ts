@@ -8,11 +8,11 @@ import { AppConfig } from './config/app.config';
 export class AppService {
   constructor(
     private readonly Logger: LoggerService,
-    private readonly configService: ConfigService<ConfigType>
+    private readonly configService: ConfigService<ConfigType>,
   ) {}
 
   getHello(): string {
-    const prefix = this.configService.get<AppConfig>('app')
+    const prefix = this.configService.get<AppConfig>('app');
     return this.Logger.log(`${prefix} Hello World`);
   }
 }

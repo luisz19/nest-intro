@@ -17,10 +17,9 @@ import { appConfigSchema } from './config/config.types';
         // allowUnknown: false, só faz sentido se a aplicação estiver usando um container docker muito isolado que execute apenas Node por exemplo.
         abortEarly: true, // alerta sobre possíveis erros com validação de Schema
       },
-      
     }),
-    
-    TasksModule
+
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService, MessageFormatterService, LoggerService],

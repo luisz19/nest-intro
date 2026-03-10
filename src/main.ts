@@ -7,9 +7,9 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true, //converte tipos automaticamente
-      whitelist: true //remove campos extras
-    })
-  )
+      whitelist: true, //remove campos extras
+    }),
+  );
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap().catch((err) => {
