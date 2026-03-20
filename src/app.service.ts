@@ -7,7 +7,7 @@ import { TypedConfigService } from './config/typed-config.service';
 export class AppService {
   constructor(
     private readonly Logger: LoggerService,
-    private readonly configService: TypedConfigService
+    private readonly configService: TypedConfigService,
   ) {}
 
   getHello(): string {
