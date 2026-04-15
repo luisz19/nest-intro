@@ -24,5 +24,5 @@ export class Task {
     enum: TaskStatus,
     default: TaskStatus.OPEN,
   })
-  status: string;
+  status: TaskStatus;
 }

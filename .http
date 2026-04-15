@@ -18,7 +18,7 @@ Content-Type: {{contentType}}
 {
     "title": "Nest Task",
     "description": "some description",
-    "status": "DONE"
+    "status": "OPEN"
 }
 
 ### Set the task id
@@ -39,7 +39,7 @@ PATCH {{baseUrl}}/tasks/{{taskId}}
 Content-Type: {{contentType}}
 
 {
-    "status": "IN_PROGRESS"
+    "status": "DONE"
 }
 
 ### DELETE task
