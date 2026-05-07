@@ -5,7 +5,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -16,12 +16,15 @@ export class User {
   @Column()
   email: string;
 
+  @Column()
+  name: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Task, (task) => task.user)
+  @OneToMany(() => Task, (task) => task.user)
   tasks: Task[];
 }

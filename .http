@@ -18,7 +18,8 @@ Content-Type: {{contentType}}
 {
     "title": "Nest Task",
     "description": "some description",
-    "status": "OPEN"
+    "status": "OPEN",
+    "userId": "f25a781e-f440-46ec-9196-2a72a97fde08"
 }
 
 ### Set the task id

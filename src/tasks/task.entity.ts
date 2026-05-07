@@ -27,6 +27,9 @@ export class Task {
   })
   status: TaskStatus;
 
+  @Column()
+  userId: string;
+
   @ManyToOne(() => User, (user) => user.tasks, { nullable: false }) // nullable: enable that a task must be associated with a user
   user: User;
 }
